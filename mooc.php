@@ -1,7 +1,17 @@
 <?php
-// Demand a GET parameter
+// Demand a GET parameter for the name
 if ( !isset($_GET['name']) || strlen($_GET['name']) < 1 ) {
-    die('Name parameter missing');
+    echo '<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Rock Paper Scissors 5bad57bf</title>
+    </head>
+    <body>
+        <h1>Rock Paper Scissors</h1>
+        <p><a href="index.php">Please Log In</a></p>
+    </body>
+    </html>';
+    die();
 }
 
 // If the user requested logout, redirect to index.php
@@ -11,13 +21,8 @@ if ( isset($_POST['logout']) ) {
 }
 
 // Set up the values for the game
-// 0 is Rock, 1 is Paper, and 2 is Scissors
 $names = array('Rock', 'Paper', 'Scissors');
-
-// Get the human play; default is -1 if not set
 $human = isset($_POST["human"]) ? $_POST['human'] + 0 : -1;
-
-// Computer play is randomized
 $computer = rand(0, 2);
 
 // Function to determine the game result
@@ -41,18 +46,14 @@ $result = check($computer, $human);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock Paper Scissors 5bad57bf</title> 
+    <title>Rock Paper Scissors 5bad57bf</title>
     <?php require_once "bootstrap.php"; ?>
 </head>
 <body>
 <div class="container">
     <h1>Rock Paper Scissors</h1>
     <?php
-    if (isset($_REQUEST['name'])) {
-        echo "<p>Welcome: ";
-        echo htmlentities($_REQUEST['name']);
-        echo "</p>\n";
-    }
+    echo "<p>Welcome: " . htmlentities($_GET['name']) . "</p>\n";
     ?>
     <form method="post">
         <select name="human">
